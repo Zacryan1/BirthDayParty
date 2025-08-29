@@ -23,7 +23,7 @@ export default function Home() {
     { name: 'Belle', title: 'Beauty and the Beast', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
     { name: 'Cinderella', title: 'A Dream is a Wish', image: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
     { name: 'Ariel', title: 'The Little Mermaid', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Rapunzel', title: 'Tangled', image: '@assets/download (1)_1756493523555.jpg' },
+    { name: 'Rapunzel', title: 'Tangled', image: '@assets/rapunzel.jpg' },
     { name: 'Snow White', title: 'Fairest of All', image: 'https://pixabay.com/get/ga27b8e0a556a325f72742c93db694053e823f4d7813b2ffd70f9fb38c461579b60dcf123a062d651ac1baae082dfc5b40ed721ae89b34ff9cd462533c616f036_1280.jpg' },
     { name: 'Aurora', title: 'Sleeping Beauty', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
     { name: 'Jasmine', title: 'A Whole New World', image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },

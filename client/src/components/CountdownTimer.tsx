@@ -48,7 +48,6 @@ export default function CountdownTimer({ onComplete }: CountdownTimerProps) {
       >
         Magical Birthday
       </motion.h1>
-      
       <motion.p 
         className="font-script text-3xl md:text-4xl text-magical-gold mb-8"
         initial={{ opacity: 0 }}
@@ -58,7 +57,6 @@ export default function CountdownTimer({ onComplete }: CountdownTimerProps) {
       >
         ✨ September 18th Celebration ✨
       </motion.p>
-      
       <motion.div 
         className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 mb-8 shadow-2xl"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -66,7 +64,7 @@ export default function CountdownTimer({ onComplete }: CountdownTimerProps) {
         transition={{ delay: 0.8 }}
         data-testid="card-countdown-timer"
       >
-        <h2 className="font-serif text-2xl md:text-3xl text-foreground mb-6" data-testid="text-countdown-title">
+        <h2 className="font-serif text-2xl md:text-3xl mb-6 text-[#efc801]" data-testid="text-countdown-title">
           Time Until the Magic Begins
         </h2>
         
@@ -97,7 +95,6 @@ export default function CountdownTimer({ onComplete }: CountdownTimerProps) {
           </div>
         </div>
       </motion.div>
-
       <motion.button
         onClick={onComplete}
         className="bg-magical-purple hover:bg-magical-purple/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"

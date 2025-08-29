@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import ForestBackground from "@/components/ForestBackground";
+import CountdownTimer from "@/components/CountdownTimer";
 
 export default function Home() {
   useEffect(() => {
@@ -31,20 +32,9 @@ export default function Home() {
           transition={{ duration: 2, ease: "easeOut" }}
           data-testid="birthday-invitation"
         >
-          <motion.h1 
-            className="forest-glowing-text font-serif text-6xl md:text-8xl lg:text-9xl font-bold"
-            animate={{ 
-              textShadow: [
-                "0 0 20px rgba(255, 255, 100, 0.9), 0 0 40px rgba(255, 255, 150, 0.7), 0 0 60px rgba(255, 215, 0, 0.5)",
-                "0 0 30px rgba(255, 255, 100, 1), 0 0 60px rgba(255, 255, 150, 0.9), 0 0 90px rgba(255, 215, 0, 0.7)",
-                "0 0 20px rgba(255, 255, 100, 0.9), 0 0 40px rgba(255, 255, 150, 0.7), 0 0 60px rgba(255, 215, 0, 0.5)"
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            data-testid="title-happy-birthday"
-          >
-            ✨ Happiest 24th Birthday! ✨
-          </motion.h1>
+          <div className="forest-timer-container">
+            <CountdownTimer onComplete={() => {}} />
+          </div>
         </motion.div>
       </section>
 

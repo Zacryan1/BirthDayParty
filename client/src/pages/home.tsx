@@ -1,45 +1,17 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CountdownTimer from "@/components/CountdownTimer";
-import PrincessSelection from "@/components/PrincessSelection";
-import PrinceScene from "@/components/PrinceScene";
-import CastleScene from "@/components/CastleScene";
-import CakeScene from "@/components/CakeScene";
+import GreetingCard from "@/components/GreetingCard";
+import RosePetals from "@/components/RosePetals";
 import SparkleBackground from "@/components/SparkleBackground";
-import rapunzelImage from "@/assets/rapunzel.jpg";
 
-type Scene = 'countdown' | 'princess-selection' | 'prince' | 'castle' | 'cake';
-
-interface Princess {
-  name: string;
-  title: string;
-  image: string;
-}
+type Scene = 'countdown' | 'greeting-card' | 'final-celebration';
 
 export default function Home() {
   const [currentScene, setCurrentScene] = useState<Scene>('countdown');
-  const [selectedPrincess, setSelectedPrincess] = useState<Princess | null>(null);
-
-  const princesses: Princess[] = [
-    { name: 'Belle', title: 'Beauty and the Beast', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Cinderella', title: 'A Dream is a Wish', image: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Ariel', title: 'The Little Mermaid', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Rapunzel', title: 'Tangled', image: rapunzelImage },
-    { name: 'Snow White', title: 'Fairest of All', image: 'https://pixabay.com/get/ga27b8e0a556a325f72742c93db694053e823f4d7813b2ffd70f9fb38c461579b60dcf123a062d651ac1baae082dfc5b40ed721ae89b34ff9cd462533c616f036_1280.jpg' },
-    { name: 'Aurora', title: 'Sleeping Beauty', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Jasmine', title: 'A Whole New World', image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' },
-    { name: 'Tiana', title: 'Princess and the Frog', image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400' }
-  ];
 
   const transitionToScene = (scene: Scene) => {
     setCurrentScene(scene);
-  };
-
-  const handlePrincessSelect = (princess: Princess) => {
-    setSelectedPrincess(princess);
-    setTimeout(() => {
-      transitionToScene('prince');
-    }, 800);
   };
 
   const sceneVariants = {
@@ -64,76 +36,70 @@ export default function Home() {
             className="min-h-screen flex flex-col items-center justify-center p-8"
             data-testid="countdown-scene"
           >
-            <CountdownTimer onComplete={() => transitionToScene('princess-selection')} />
+            <CountdownTimer onComplete={() => transitionToScene('greeting-card')} />
           </motion.div>
         )}
 
-        {currentScene === 'princess-selection' && (
+        {currentScene === 'greeting-card' && (
           <motion.div
-            key="princess-selection"
+            key="greeting-card"
             variants={sceneVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             transition={{ duration: 0.8 }}
             className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="princess-selection-scene"
+            data-testid="greeting-card-scene"
           >
-            <PrincessSelection princesses={princesses} onSelect={handlePrincessSelect} />
+            <GreetingCard onComplete={() => transitionToScene('final-celebration')} />
           </motion.div>
         )}
 
-        {currentScene === 'prince' && (
+        {currentScene === 'final-celebration' && (
           <motion.div
-            key="prince"
+            key="final-celebration"
             variants={sceneVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="prince-scene"
+            className="min-h-screen flex flex-col items-center justify-center p-8 relative"
+            data-testid="final-celebration-scene"
           >
-            <PrinceScene 
-              selectedPrincess={selectedPrincess} 
-              onAcceptRoses={() => transitionToScene('castle')} 
-            />
-          </motion.div>
-        )}
+            <RosePetals />
+            <div className="text-center z-10 relative">
+              <motion.h2 
+                className="font-serif text-6xl md:text-8xl font-bold text-magical-purple mb-8"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                data-testid="title-final-celebration"
+              >
+                🎉 Happy Birthday! 🎉
+              </motion.h2>
+              
+              <motion.p 
+                className="font-script text-3xl text-magical-gold mb-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                data-testid="text-final-message"
+              >
+                ✨ May your special day be filled with magical moments ✨
+              </motion.p>
 
-        {currentScene === 'castle' && (
-          <motion.div
-            key="castle"
-            variants={sceneVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="castle-scene"
-          >
-            <CastleScene onEnterCastle={() => transitionToScene('cake')} />
-          </motion.div>
-        )}
-
-        {currentScene === 'cake' && (
-          <motion.div
-            key="cake"
-            variants={sceneVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="cake-scene"
-          >
-            <CakeScene 
-              selectedPrincess={selectedPrincess} 
-              onRestart={() => {
-                setSelectedPrincess(null);
-                transitionToScene('countdown');
-              }} 
-            />
+              <motion.button
+                onClick={() => transitionToScene('countdown')}
+                className="bg-magical-pink hover:bg-magical-pink/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2 }}
+                data-testid="button-start-over"
+              >
+                Start Over 🌹
+              </motion.button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

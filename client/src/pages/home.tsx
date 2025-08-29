@@ -1,108 +1,70 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import CountdownTimer from "@/components/CountdownTimer";
-import GreetingCard from "@/components/GreetingCard";
-import RosePetals from "@/components/RosePetals";
-import SparkleBackground from "@/components/SparkleBackground";
-
-type Scene = 'countdown' | 'greeting-card' | 'final-celebration';
+import { motion } from "framer-motion";
+import FirefliesBackground from "@/components/FirefliesBackground";
 
 export default function Home() {
-  const [currentScene, setCurrentScene] = useState<Scene>('countdown');
-
-  const transitionToScene = (scene: Scene) => {
-    setCurrentScene(scene);
-  };
-
-  const sceneVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 }
-  };
-
   return (
-    <div className="magical-gradient min-h-screen relative overflow-x-hidden">
-      <SparkleBackground />
+    <div className="magical-birthday-bg min-h-screen relative overflow-hidden flex items-center justify-center">
+      <FirefliesBackground />
       
-      <AnimatePresence mode="wait">
-        {currentScene === 'countdown' && (
-          <motion.div
-            key="countdown"
-            variants={sceneVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="countdown-scene"
-          >
-            <CountdownTimer onComplete={() => transitionToScene('greeting-card')} />
-          </motion.div>
-        )}
+      <motion.div 
+        className="text-center z-10 relative px-8"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        data-testid="birthday-invitation"
+      >
+        <motion.h1 
+          className="glowing-text font-serif text-6xl md:text-8xl lg:text-9xl font-bold mb-6"
+          animate={{ 
+            textShadow: [
+              "0 0 20px rgba(255, 255, 100, 0.8), 0 0 40px rgba(255, 255, 150, 0.6), 0 0 60px rgba(255, 215, 0, 0.4)",
+              "0 0 30px rgba(255, 255, 100, 1), 0 0 60px rgba(255, 255, 150, 0.8), 0 0 90px rgba(255, 215, 0, 0.6)",
+              "0 0 20px rgba(255, 255, 100, 0.8), 0 0 40px rgba(255, 255, 150, 0.6), 0 0 60px rgba(255, 215, 0, 0.4)"
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          data-testid="title-happy-birthday"
+        >
+          ✨ Happy Birthday! ✨
+        </motion.h1>
+        
+        <motion.p 
+          className="glowing-subtitle font-script text-2xl md:text-4xl lg:text-5xl text-magical-gold"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1 }}
+          data-testid="subtitle-magical-celebration"
+        >
+          You're invited to a magical celebration
+        </motion.p>
 
-        {currentScene === 'greeting-card' && (
-          <motion.div
-            key="greeting-card"
-            variants={sceneVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8"
-            data-testid="greeting-card-scene"
+        <motion.div 
+          className="mt-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 1 }}
+        >
+          <motion.p 
+            className="font-serif text-xl md:text-2xl text-white/90 mb-4"
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            data-testid="text-date-celebration"
           >
-            <GreetingCard onComplete={() => transitionToScene('final-celebration')} />
-          </motion.div>
-        )}
-
-        {currentScene === 'final-celebration' && (
-          <motion.div
-            key="final-celebration"
-            variants={sceneVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="min-h-screen flex flex-col items-center justify-center p-8 relative"
-            data-testid="final-celebration-scene"
+            September 18th, 2025
+          </motion.p>
+          
+          <motion.div 
+            className="inline-block bg-white/10 backdrop-blur-sm rounded-full px-8 py-3 border border-white/20"
+            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+            transition={{ duration: 0.3 }}
+            data-testid="container-rsvp"
           >
-            <RosePetals />
-            <div className="text-center z-10 relative">
-              <motion.h2 
-                className="font-serif text-6xl md:text-8xl font-bold text-magical-purple mb-8"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                data-testid="title-final-celebration"
-              >
-                🎉 Happy Birthday! 🎉
-              </motion.h2>
-              
-              <motion.p 
-                className="font-script text-3xl text-magical-gold mb-8"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                data-testid="text-final-message"
-              >
-                ✨ May your special day be filled with magical moments ✨
-              </motion.p>
-
-              <motion.button
-                onClick={() => transitionToScene('countdown')}
-                className="bg-magical-pink hover:bg-magical-pink/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2 }}
-                data-testid="button-start-over"
-              >
-                Start Over 🌹
-              </motion.button>
-            </div>
+            <p className="font-script text-lg text-white/80" data-testid="text-rsvp">
+              ✨ A day filled with wonder awaits ✨
+            </p>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radius: 0.75rem;
+  --background: hsl(320, 25%, 97%);
+  --foreground: hsl(260, 15%, 15%);
+  --card: hsl(320, 20%, 95%);
+  --card-foreground: hsl(260, 15%, 20%);
+  --popover: hsl(320, 20%, 95%);
+  --popover-foreground: hsl(260, 15%, 20%);
+  --primary: hsl(280, 65%, 75%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(40, 70%, 85%);
+  --secondary-foreground: hsl(260, 15%, 25%);
+  --muted: hsl(320, 15%, 90%);
+  --muted-foreground: hsl(260, 10%, 45%);
+  --accent: hsl(50, 80%, 80%);
+  --accent-foreground: hsl(260, 15%, 25%);
+  --destructive: hsl(356.3033, 90.5579%, 54.3137%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(320, 20%, 85%);
+  --input: hsl(200, 23.0769%, 97.4510%);
+  --ring: hsl(280, 65%, 75%);
+  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
+  --chart-2: hsl(159.7826, 100%, 36.0784%);
+  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
+  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
+  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
+  --magical-pink: hsl(350, 70%, 85%);
+  --magical-lavender: hsl(270, 30%, 92%);
+  --magical-gold: hsl(45, 100%, 70%);
+  --magical-mint: hsl(120, 25%, 95%);
+  --magical-purple: hsl(280, 60%, 70%);
+  --sidebar: hsl(180, 6.6667%, 97.0588%);
+  --sidebar-foreground: hsl(210, 25%, 7.8431%);
+  --sidebar-primary: hsl(203.8863, 88.2845%, 53.1373%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(211.5789, 51.3514%, 92.7451%);
+  --sidebar-accent-foreground: hsl(203.8863, 88.2845%, 53.1373%);
+  --sidebar-border: hsl(205.0000, 25.0000%, 90.5882%);
+  --sidebar-ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --font-sans: Inter, sans-serif;
+  --font-serif: Playfair Display, serif;
+  --font-script: Dancing Script, cursive;
+  --font-mono: Menlo, monospace;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(260, 20%, 8%);
+  --foreground: hsl(320, 25%, 92%);
+  --card: hsl(260, 25%, 12%);
+  --card-foreground: hsl(320, 20%, 88%);
+  --popover: hsl(260, 25%, 12%);
+  --popover-foreground: hsl(320, 20%, 88%);
+  --primary: hsl(280, 65%, 75%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(40, 70%, 85%);
+  --secondary-foreground: hsl(260, 15%, 25%);
+  --muted: hsl(260, 15%, 18%);
+  --muted-foreground: hsl(320, 10%, 55%);
+  --accent: hsl(50, 80%, 80%);
+  --accent-foreground: hsl(260, 15%, 25%);
+  --destructive: hsl(356.3033, 90.5579%, 54.3137%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(260, 20%, 22%);
+  --input: hsl(260, 25%, 16%);
+  --ring: hsl(280, 65%, 75%);
+  --magical-pink: hsl(350, 70%, 85%);
+  --magical-lavender: hsl(270, 30%, 92%);
+  --magical-gold: hsl(45, 100%, 70%);
+  --magical-mint: hsl(120, 25%, 95%);
+  --magical-purple: hsl(280, 60%, 70%);
+}
+
+.magical-gradient {
+  background: linear-gradient(135deg, 
+    hsl(280, 60%, 85%) 0%, 
+    hsl(320, 50%, 90%) 25%, 
+    hsl(45, 80%, 90%) 50%, 
+    hsl(200, 40%, 85%) 75%, 
+    hsl(280, 60%, 85%) 100%);
+}
+
+.countdown-number {
+  background: linear-gradient(135deg, var(--magical-gold), var(--magical-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.princess-card {
+  transition: all 0.3s ease;
+}
+
+.princess-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+}
+
+.sparkle {
+  background: linear-gradient(45deg, #FFD700, #FFF);
+  border-radius: 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}

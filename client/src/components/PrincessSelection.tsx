@@ -32,7 +32,11 @@ export default function PrincessSelection({ princesses, onSelect }: PrincessSele
         {princesses.map((princess, index) => (
           <motion.div
             key={princess.name}
-            className="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl cursor-pointer group"
+            className={`princess-card text-center cursor-pointer group ${
+              princess.name === 'Rapunzel' 
+                ? 'rapunzel-character' 
+                : 'bg-card/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl'
+            }`}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.6 }}
@@ -48,10 +52,16 @@ export default function PrincessSelection({ princesses, onSelect }: PrincessSele
             <img 
               src={princess.image} 
               alt={`Princess ${princess.name}`} 
-              className="w-full h-48 object-cover rounded-xl mb-4 group-hover:brightness-110 transition-all duration-300"
+              className={`transition-all duration-300 group-hover:brightness-110 ${
+                princess.name === 'Rapunzel'
+                  ? 'w-full h-64 object-cover rounded-full border-4 border-magical-gold shadow-2xl drop-shadow-[0_0_20px_rgba(255,215,0,0.6)]'
+                  : 'w-full h-48 object-cover rounded-xl mb-4'
+              }`}
               data-testid={`img-princess-${princess.name.toLowerCase()}`}
             />
-            <h3 className="font-serif text-xl font-semibold text-magical-purple" data-testid={`text-princess-name-${princess.name.toLowerCase()}`}>
+            <h3 className={`font-serif text-xl font-semibold text-magical-purple ${
+              princess.name === 'Rapunzel' ? 'mt-3' : ''
+            }`} data-testid={`text-princess-name-${princess.name.toLowerCase()}`}>
               {princess.name}
             </h3>
             <p className="text-muted-foreground text-sm" data-testid={`text-princess-title-${princess.name.toLowerCase()}`}>

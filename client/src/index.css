@@ -172,3 +172,22 @@
 .animate-bounce-slow {
   animation: bounce 2s ease-in-out infinite;
 }
+
+.rapunzel-character {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.rapunzel-character:hover {
+  transform: translateY(-12px) scale(1.05);
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.8));
+}
+
+.rapunzel-character img {
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+}
+
+.rapunzel-character:hover img {
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.7)) brightness(1.15);
+}

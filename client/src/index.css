@@ -323,28 +323,6 @@
   }
 }
 
-/* Celebration Section */
-.celebration-bg {
-  background: linear-gradient(135deg, 
-    #4a0e4e 0%, 
-    #81007f 25%, 
-    #ff006e 50%, 
-    #fb8500 75%, 
-    #ffb700 100%);
-}
-
-.celebration-text {
-  color: #ffffff;
-  text-shadow: 
-    0 0 20px rgba(255, 183, 0, 0.8),
-    0 0 40px rgba(255, 183, 0, 0.6),
-    0 0 60px rgba(255, 183, 0, 0.4);
-}
-
-.celebration-particle {
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-}
 
 /* Forest Timer Styling */
 .forest-timer-container .countdown-number {

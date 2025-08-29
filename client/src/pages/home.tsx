@@ -25,7 +25,7 @@ export default function Home() {
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           data-testid="title-happy-birthday"
         >
-          ✨ Happy Birthday! ✨
+          ✨ Happiest 24th Birthday! ✨
         </motion.h1>
         
         <motion.p 

@@ -1,0 +1,561 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Birthday Countdown - September 18th</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    magical: {
+                        pink: "var(--magical-pink)",
+                        lavender: "var(--magical-lavender)",
+                        gold: "var(--magical-gold)",
+                        mint: "var(--magical-mint)",
+                        purple: "var(--magical-purple)",
+                    },
+                    border: "var(--border)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    serif: ["Playfair Display", "serif"],
+                    sans: ["Inter", "sans-serif"],
+                    script: ["Dancing Script", "cursive"],
+                },
+                animation: {
+                    'float': 'float 3s ease-in-out infinite',
+                    'sparkle': 'sparkle 2s ease-in-out infinite',
+                    'fadeIn': 'fadeIn 1s ease-in-out',
+                    'slideUp': 'slideUp 0.8s ease-out',
+                    'scaleIn': 'scaleIn 0.6s ease-out',
+                    'bounce-slow': 'bounce 2s ease-in-out infinite',
+                }
+            },
+        }
+    };
+    </script>
+    <style>
+        :root {
+            --radius: 0.75rem;
+            --background: hsl(320 25% 97%);
+            --foreground: hsl(260 15% 15%);
+            --card: hsl(320 20% 95%);
+            --card-foreground: hsl(260 15% 20%);
+            --primary: hsl(280 65% 75%);
+            --primary-foreground: hsl(0 0% 100%);
+            --secondary: hsl(40 70% 85%);
+            --secondary-foreground: hsl(260 15% 25%);
+            --muted: hsl(320 15% 90%);
+            --muted-foreground: hsl(260 10% 45%);
+            --accent: hsl(50 80% 80%);
+            --accent-foreground: hsl(260 15% 25%);
+            --magical-pink: hsl(350 70% 85%);
+            --magical-lavender: hsl(270 30% 92%);
+            --magical-gold: hsl(45 100% 70%);
+            --magical-mint: hsl(120 25% 95%);
+            --magical-purple: hsl(280 60% 70%);
+            --border: hsl(320 20% 85%);
+            --ring: hsl(280 65% 75%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #FFD700, #FFF);
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .magical-gradient {
+            background: linear-gradient(135deg, 
+                hsl(280 60% 85%) 0%, 
+                hsl(320 50% 90%) 25%, 
+                hsl(45 80% 90%) 50%, 
+                hsl(200 40% 85%) 75%, 
+                hsl(280 60% 85%) 100%);
+        }
+
+        .scene {
+            min-height: 100vh;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .scene.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .princess-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .princess-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+        }
+
+        .countdown-number {
+            background: linear-gradient(135deg, var(--magical-gold), var(--magical-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="magical-gradient min-h-screen relative overflow-x-hidden">
+    <!-- Floating Sparkles Background -->
+    <div class="sparkles">
+        <div class="sparkle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="sparkle" style="left: 80%; top: 30%; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="left: 60%; top: 60%; animation-delay: 1s;"></div>
+        <div class="sparkle" style="left: 30%; top: 80%; animation-delay: 1.5s;"></div>
+        <div class="sparkle" style="left: 90%; top: 70%; animation-delay: 2s;"></div>
+        <div class="sparkle" style="left: 20%; top: 50%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <!-- Scene 1: Countdown Timer -->
+    <div id="countdown-scene" class="scene active flex-col items-center justify-center p-8">
+        <div class="text-center animate-fadeIn">
+            <h1 class="font-serif text-6xl md:text-8xl font-bold text-magical-purple mb-4 animate-float">
+                Magical Birthday
+            </h1>
+            <p class="font-script text-3xl md:text-4xl text-magical-gold mb-8">
+                ✨ September 18th Celebration ✨
+            </p>
+            
+            <!-- Countdown Timer -->
+            <div class="bg-card/80 backdrop-blur-sm rounded-3xl p-8 mb-8 shadow-2xl animate-scaleIn">
+                <h2 class="font-serif text-2xl md:text-3xl text-foreground mb-6">Time Until the Magic Begins</h2>
+                <div class="grid grid-cols-4 gap-4 md:gap-6">
+                    <div class="text-center">
+                        <div class="countdown-number font-serif text-4xl md:text-6xl font-bold" id="days">00</div>
+                        <div class="text-muted-foreground font-medium">Days</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="countdown-number font-serif text-4xl md:text-6xl font-bold" id="hours">00</div>
+                        <div class="text-muted-foreground font-medium">Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="countdown-number font-serif text-4xl md:text-6xl font-bold" id="minutes">00</div>
+                        <div class="text-muted-foreground font-medium">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="countdown-number font-serif text-4xl md:text-6xl font-bold" id="seconds">00</div>
+                        <div class="text-muted-foreground font-medium">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="startMagicalJourney()" class="bg-magical-purple hover:bg-magical-purple/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-bounce-slow">
+                Begin Your Magical Journey ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- Scene 2: Princess Selection -->
+    <div id="princess-selection" class="scene flex-col items-center justify-center p-8">
+        <div class="text-center mb-12 animate-slideUp">
+            <h2 class="font-serif text-5xl md:text-6xl font-bold text-magical-purple mb-4">
+                Choose Your Princess
+            </h2>
+            <p class="font-script text-2xl text-magical-gold">
+                ✨ Which magical princess will you be today? ✨
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <!-- @MAP: princesses.map(princess => ( -->
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Belle')">
+                <!-- Disney princess Belle in yellow gown with books and roses -->
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Belle" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Belle</h3>
+                <p class="text-muted-foreground text-sm">Beauty and the Beast</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Cinderella')">
+                <!-- Disney princess Cinderella in blue ballgown with glass slippers -->
+                <img src="https://images.unsplash.com/photo-1566837945700-30057527ade0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Cinderella" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Cinderella</h3>
+                <p class="text-muted-foreground text-sm">A Dream is a Wish</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Ariel')">
+                <!-- Disney princess Ariel with red hair and mermaid tail by the ocean -->
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Ariel" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Ariel</h3>
+                <p class="text-muted-foreground text-sm">The Little Mermaid</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Rapunzel')">
+                <!-- Disney princess Rapunzel with long blonde hair and purple dress -->
+                <img src="https://pixabay.com/get/g95da0db1554e86fdcb9bdf46b67d15273abd8b620e16aa10631e87ccaacfb383454789f17fde257ebb6197146cb669fb5536391d36dfe274f5f7b9af5a54f21f_1280.jpg" alt="Princess Rapunzel" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Rapunzel</h3>
+                <p class="text-muted-foreground text-sm">Tangled</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Snow White')">
+                <!-- Disney princess Snow White with dark hair, red lips, and yellow dress -->
+                <img src="https://pixabay.com/get/ga27b8e0a556a325f72742c93db694053e823f4d7813b2ffd70f9fb38c461579b60dcf123a062d651ac1baae082dfc5b40ed721ae89b34ff9cd462533c616f036_1280.jpg" alt="Princess Snow White" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Snow White</h3>
+                <p class="text-muted-foreground text-sm">Fairest of All</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Aurora')">
+                <!-- Disney princess Aurora in pink dress sleeping beauty with spinning wheel -->
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Aurora" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Aurora</h3>
+                <p class="text-muted-foreground text-sm">Sleeping Beauty</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Jasmine')">
+                <!-- Disney princess Jasmine in turquoise outfit with magic carpet and palace -->
+                <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Jasmine" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Jasmine</h3>
+                <p class="text-muted-foreground text-sm">A Whole New World</p>
+            </div>
+
+            <div class="princess-card bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl" onclick="selectPrincess('Tiana')">
+                <!-- Disney princess Tiana in green dress with lily pads and New Orleans theme -->
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400" alt="Princess Tiana" class="w-full h-48 object-cover rounded-xl mb-4" data-mock="true">
+                <h3 class="font-serif text-xl font-semibold text-magical-purple">Tiana</h3>
+                <p class="text-muted-foreground text-sm">Princess and the Frog</p>
+            </div>
+            <!-- @END_MAP )) -->
+        </div>
+    </div>
+
+    <!-- Scene 3: Prince and Roses -->
+    <div id="prince-scene" class="scene flex-col items-center justify-center p-8">
+        <div class="text-center mb-12 animate-slideUp">
+            <h2 class="font-serif text-5xl md:text-6xl font-bold text-magical-purple mb-4">
+                A Royal Surprise
+            </h2>
+            <p class="font-script text-2xl text-magical-gold">
+                ✨ Prince Charming approaches with a special gift ✨
+            </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl mx-auto">
+            <!-- Prince Character -->
+            <div class="animate-scaleIn">
+                <!-- Handsome prince in royal attire with crown approaching with flowers -->
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=600" alt="Prince Charming" class="w-64 h-80 object-cover rounded-2xl shadow-2xl animate-float" data-mock="true">
+            </div>
+
+            <!-- Interaction Area -->
+            <div class="text-center bg-card/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl animate-slideUp">
+                <h3 class="font-serif text-3xl font-semibold text-magical-purple mb-6">
+                    "Happy Birthday, Princess <span id="selected-princess">Belle</span>!"
+                </h3>
+                
+                <!-- Beautiful bouquet of white roses with silk ribbon -->
+                <img src="https://pixabay.com/get/g28f005e101f5b74dc568ce6630286bfe2753ff13678e80bb9f194ff6e134745cc13083f996d8242be53d853fa79d42ad57377c2264709c1ce7699babd29c06e8_1280.jpg" alt="White roses bouquet" class="w-80 h-60 object-cover rounded-xl mx-auto mb-6 shadow-lg" data-mock="true">
+                
+                <p class="font-script text-xl text-magical-gold mb-6">
+                    "These white roses are as pure and beautiful as your heart. 
+                    Will you join me for a journey to the castle?"
+                </p>
+
+                <button onclick="acceptRoses()" class="bg-magical-pink hover:bg-magical-pink/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Accept the Roses 🌹
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 4: Castle Journey -->
+    <div id="castle-scene" class="scene flex-col items-center justify-center p-8">
+        <div class="text-center mb-12 animate-slideUp">
+            <h2 class="font-serif text-5xl md:text-6xl font-bold text-magical-purple mb-4">
+                Journey to the Castle
+            </h2>
+            <p class="font-script text-2xl text-magical-gold">
+                ✨ A magical castle awaits with LED balloon decorations ✨
+            </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+            <!-- Fairy tale castle on mountain with LED balloon decorations and lights -->
+            <img src="https://pixabay.com/get/g7160343951b455e2548c4863fcca7e8e0b18a3eb92e6b08a7b44b9be559d21faf8e74f41f24785da6e2fd591c69bbfe5b66f9037f88405bcd35a6ae3aeac28b6_1280.jpg" alt="Magical castle on mountain" class="w-full h-96 object-cover rounded-3xl shadow-2xl mb-8 animate-scaleIn" data-mock="true">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- LED Balloon Decorations -->
+                <div class="bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl animate-slideUp">
+                    <!-- Colorful LED balloons floating with lights and decorations -->
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" alt="LED balloon decorations" class="w-full h-32 object-cover rounded-xl mb-4" data-mock="true">
+                    <h3 class="font-serif text-xl font-semibold text-magical-purple">LED Balloons</h3>
+                    <p class="text-muted-foreground">Magical lighting throughout</p>
+                </div>
+
+                <div class="bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl animate-slideUp" style="animation-delay: 0.2s;">
+                    <!-- More LED balloon decorations with sparkles and fairy lights -->
+                    <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=200" alt="More LED decorations" class="w-full h-32 object-cover rounded-xl mb-4" data-mock="true">
+                    <h3 class="font-serif text-xl font-semibold text-magical-purple">Fairy Lights</h3>
+                    <p class="text-muted-foreground">Twinkling magical ambiance</p>
+                </div>
+
+                <div class="bg-card/90 backdrop-blur-sm rounded-2xl p-6 text-center shadow-xl animate-slideUp" style="animation-delay: 0.4s;">
+                    <!-- LED balloon arch with birthday celebration theme -->
+                    <img src="https://pixabay.com/get/ga81a639316ca5f4016c2e24ae3e744f1b0a27140a5db5b8d0ead9a2658ba30d484181728aef08788b7a8d884b3cf28deee39e70de6181ae38fae17e58db17990_1280.jpg" alt="LED balloon arch" class="w-full h-32 object-cover rounded-xl mb-4" data-mock="true">
+                    <h3 class="font-serif text-xl font-semibold text-magical-purple">Balloon Arch</h3>
+                    <p class="text-muted-foreground">Grand entrance decoration</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="proceedToCake()" class="bg-magical-gold hover:bg-magical-gold/80 text-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-bounce-slow">
+                    Enter the Castle 🏰
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scene 5: Birthday Cake Celebration -->
+    <div id="cake-scene" class="scene flex-col items-center justify-center p-8">
+        <div class="text-center mb-12 animate-slideUp">
+            <h2 class="font-serif text-5xl md:text-6xl font-bold text-magical-purple mb-4">
+                🎂 Birthday Celebration 🎂
+            </h2>
+            <p class="font-script text-2xl text-magical-gold">
+                ✨ Time to make a wish and cut the magical birthday cake! ✨
+            </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Beautiful decorated birthday cake with candles and celebration theme -->
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" alt="Birthday celebration cake" class="w-96 h-64 object-cover rounded-3xl shadow-2xl mx-auto mb-8 animate-scaleIn" data-mock="true">
+
+            <div class="bg-card/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl animate-slideUp">
+                <h3 class="font-serif text-3xl font-semibold text-magical-purple mb-6">
+                    🎉 Happy Birthday, Princess <span id="final-princess">Belle</span>! 🎉
+                </h3>
+                
+                <p class="font-script text-xl text-magical-gold mb-8">
+                    "Make a wish as magical as you are, and may all your dreams come true 
+                    on this special day and always!"
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Birthday celebration with friends and family -->
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=150" alt="Birthday celebration" class="w-full h-32 object-cover rounded-xl animate-fadeIn" data-mock="true">
+                    
+                    <!-- More birthday cake celebration with decorations -->
+                    <img src="https://pixabay.com/get/g2308316c185e8efd21debd131e89b2a03a677828e2d1e0ce186b69980d8eb0a0999f2398c988a860c04c664f9460afdb6a2b5b0af018b52409246f0f2bc88c68_1280.jpg" alt="More cake celebration" class="w-full h-32 object-cover rounded-xl animate-fadeIn" style="animation-delay: 0.3s;" data-mock="true">
+                    
+                    <!-- Birthday party with balloons and gifts -->
+                    <img src="https://pixabay.com/get/g8dcfbfc262f052bf40cb512c2e12c9c1933f7bb3b42eee8d6c5f1ad0851fe57b33813af6090e984e1b919592b0968bf15f3647a72754e57c66d32f9d4efa6015_1280.jpg" alt="Birthday party celebration" class="w-full h-32 object-cover rounded-xl animate-fadeIn" style="animation-delay: 0.6s;" data-mock="true">
+                </div>
+
+                <button onclick="cutTheCake()" id="cake-button" class="bg-magical-purple hover:bg-magical-purple/80 text-primary-foreground px-8 py-4 rounded-full font-serif text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-bounce-slow">
+                    Cut the Cake! 🍰
+                </button>
+
+                <div id="celebration-message" class="hidden mt-8 p-6 bg-magical-gold/20 rounded-2xl">
+                    <h4 class="font-serif text-2xl font-bold text-magical-purple mb-4">🎊 Celebration Time! 🎊</h4>
+                    <p class="font-script text-lg text-foreground">
+                        The cake has been cut and the celebration begins! 
+                        Wishing you the most magical birthday filled with love, 
+                        laughter, and all your heart desires. 
+                        Happy Birthday, beautiful princess! ✨🎂✨
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <button onclick="restartJourney()" class="bg-muted hover:bg-muted/80 text-muted-foreground px-6 py-3 rounded-full font-serif text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    Start Over ↻
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement countdown timer functionality
+        (function() {
+            // Set target date to September 18th
+            const targetDate = new Date('2024-09-18T00:00:00');
+            let selectedPrincessName = 'Belle';
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeLeft = targetDate - now;
+
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                } else {
+                    // Birthday has arrived!
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            }
+
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
+
+            // Scene transition functions
+            window.startMagicalJourney = function() {
+                transitionToScene('princess-selection');
+            };
+
+            window.selectPrincess = function(princessName) {
+                selectedPrincessName = princessName;
+                document.getElementById('selected-princess').textContent = princessName;
+                document.getElementById('final-princess').textContent = princessName;
+                
+                // Add selection animation
+                event.target.closest('.princess-card').style.transform = 'scale(1.1)';
+                event.target.closest('.princess-card').style.boxShadow = '0 25px 50px rgba(139, 69, 19, 0.3)';
+                
+                setTimeout(() => {
+                    transitionToScene('prince-scene');
+                }, 800);
+            };
+
+            window.acceptRoses = function() {
+                // Add acceptance animation
+                event.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    event.target.style.transform = 'scale(1)';
+                    transitionToScene('castle-scene');
+                }, 300);
+            };
+
+            window.proceedToCake = function() {
+                transitionToScene('cake-scene');
+            };
+
+            window.cutTheCake = function() {
+                const button = document.getElementById('cake-button');
+                const message = document.getElementById('celebration-message');
+                
+                button.textContent = '🎉 Cake Cut! 🎉';
+                button.disabled = true;
+                button.classList.add('opacity-75');
+                
+                setTimeout(() => {
+                    message.classList.remove('hidden');
+                    message.classList.add('animate-fadeIn');
+                    // TODO: Add celebration effects, confetti, sound effects
+                }, 500);
+            };
+
+            window.restartJourney = function() {
+                transitionToScene('countdown-scene');
+                
+                // Reset cake scene
+                const button = document.getElementById('cake-button');
+                const message = document.getElementById('celebration-message');
+                button.textContent = 'Cut the Cake! 🍰';
+                button.disabled = false;
+                button.classList.remove('opacity-75');
+                message.classList.add('hidden');
+                message.classList.remove('animate-fadeIn');
+            };
+
+            function transitionToScene(sceneId) {
+                // Hide current scene
+                const currentScene = document.querySelector('.scene.active');
+                if (currentScene) {
+                    currentScene.style.opacity = '0';
+                    setTimeout(() => {
+                        currentScene.classList.remove('active');
+                        currentScene.style.display = 'none';
+                        
+                        // Show new scene
+                        const newScene = document.getElementById(sceneId);
+                        newScene.style.display = 'flex';
+                        setTimeout(() => {
+                            newScene.classList.add('active');
+                            newScene.style.opacity = '1';
+                        }, 50);
+                    }, 500);
+                }
+            }
+
+            // TODO: Add background music functionality
+            // TODO: Add sound effects for interactions
+            // TODO: Add particle effects for magical moments
+            
+        })();
+    </script>
+</body>
+</html>

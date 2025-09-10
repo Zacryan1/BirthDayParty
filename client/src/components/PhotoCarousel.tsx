@@ -6,15 +6,15 @@ import "./PhotoCarousel.css";
 
 // Import your images here or pass as props
 
-import photo1 from "@assets/Photo1.jpg";
-import photo2 from "@assets/Photo2.jpg";
-import photo3 from "@assets/Photo3.jpg";
-import photo4 from "@assets/Photo4.jpg";
-import photo5 from "@assets/Photo5.jpg";
-import photo6 from "@assets/Photo6.jpg";
-import photo7 from "@assets/Photo7.jpg";
-import photo8 from "@assets/Photo8.jpg";
-import photo9 from "@assets/Photo9.jpg";
+import photo1 from "@/assets/Photo1.jpg";
+import photo2 from "@/assets/Photo2.jpg";
+import photo3 from "@/assets/Photo3.jpg";
+import photo4 from "@/assets/Photo4.jpg";
+import photo5 from "@/assets/Photo5.jpg";
+import photo6 from "@/assets/Photo6.jpg";
+import photo7 from "@/assets/Photo7.jpg";
+import photo8 from "@/assets/Photo8.jpg";
+import photo9 from "@/assets/Photo9.jpg";
 
 const photos = 
 // [photo1, photo2, photo3, photo4, photo5, photo6,photo7,photo8,photo9];

@@ -353,3 +353,35 @@
   border: 2px solid rgba(255, 215, 0, 0.4);
   backdrop-filter: blur(10px);
 }
+
+
+/* Ensure video always covers the screen without distortion */
+.video-fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Additional adjustments for smaller devices */
+@media (max-width: 640px) {
+  .video-fullscreen {
+    object-fit: contain;
+    background-color: black;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .video-fullscreen {
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 1025px) {
+  .video-fullscreen {
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,115 @@
+.typewriter-container {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  pointer-events: none;
+  text-align: center;
+}
+
+.typewriter-text {
+  font-family: 'Cinzel', 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-shadow: 
+    /* 3D depth effect */
+    1px 1px 0px #FFD700,
+    2px 2px 0px #FFA500,
+    3px 3px 0px #FF8C00,
+    4px 4px 0px #FF6347,
+    5px 5px 0px #FF4500,
+    /* Glow effects */
+    0 0 15px rgba(255, 215, 0, 0.8),
+    0 0 30px rgba(255, 165, 0, 0.6),
+    0 0 45px rgba(255, 140, 0, 0.4),
+    0 0 60px rgba(255, 99, 71, 0.3),
+    /* Drop shadow */
+    8px 8px 12px rgba(0, 0, 0, 0.8);
+  letter-spacing: 3px;
+  line-height: 1.1;
+  animation: textGlow 3s ease-in-out infinite, textFloat 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(5deg);
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background-color: #FFFFFF;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 
+      1px 1px 0px #FFD700,
+      2px 2px 0px #FFA500,
+      3px 3px 0px #FF8C00,
+      4px 4px 0px #FF6347,
+      5px 5px 0px #FF4500,
+      0 0 15px rgba(255, 215, 0, 0.8),
+      0 0 30px rgba(255, 165, 0, 0.6),
+      0 0 45px rgba(255, 140, 0, 0.4),
+      0 0 60px rgba(255, 99, 71, 0.3),
+      8px 8px 12px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 
+      1px 1px 0px #FFD700,
+      2px 2px 0px #FFA500,
+      3px 3px 0px #FF8C00,
+      4px 4px 0px #FF6347,
+      5px 5px 0px #FF4500,
+      0 0 25px rgba(255, 215, 0, 1),
+      0 0 40px rgba(255, 165, 0, 0.8),
+      0 0 55px rgba(255, 140, 0, 0.6),
+      0 0 70px rgba(255, 99, 71, 0.5),
+      8px 8px 12px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@keyframes textFloat {
+  0%, 100% {
+    transform: perspective(1000px) rotateX(5deg) translateY(0px);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(8deg) translateY(-5px);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .typewriter-text {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  
+  .typewriter-container {
+    top: -50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .typewriter-text {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .typewriter-container {
+    top: -40px;
+  }
+}

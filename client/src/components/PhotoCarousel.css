@@ -2,9 +2,11 @@
   width: 500px;
   height: 500px;
   perspective: 1000px;
-  margin: auto;
+  margin: 0 auto;
   position: relative;
   user-select: none; /* Prevent text selection while dragging */
+  padding-top: 100px; /* Add space for the typewriter text */
+  transform: translateY(-100px); /* Move carousel further up */
 }
 
 .carousel {

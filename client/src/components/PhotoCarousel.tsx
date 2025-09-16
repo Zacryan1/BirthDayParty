@@ -49,7 +49,7 @@ const PhotoCarousel = () => {
   const [, setLocation] = useLocation();
 
 
-  const radius = 250;
+  const radius = 300; // slightly reduce spacing between items
   const photoCount = photos.length;
   const slice = 360 / photoCount;
 

@@ -2,7 +2,7 @@
   width: 500px;
   height: 500px;
   perspective: 1000px;
-  margin: 0 auto;
+   margin: 0 auto; 
   position: relative;
   user-select: none; /* Prevent text selection while dragging */
   padding-top: 100px; /* Add space for the typewriter text */
@@ -27,8 +27,8 @@
 
 
 .carousel-item img {
-  width: 120px;
-  height: 160px;
+  width: 114px; /* small increase to tighten gaps */
+  height: 152px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   object-fit: cover;
